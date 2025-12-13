@@ -1,0 +1,32 @@
+## 📂 Final Project Directory Structure
+
+Your main project folder is the **Root Directory** (e.g., `INTERNSHIP MVP PROJECT`). Everything is located inside it.
+
+```
+INTERNSHIP MVP PROJECT/  <-- ROOT DIRECTORY
+├── main.tf              # 1. Root Orchestrator (Calls all modules)
+├── variables.tf         # 2. Root Inputs (aws_region, project_name, passwords, etc.)
+├── outputs.tf           # 3. Root Outputs (DB Endpoint, S3 Bucket Name, etc.)
+├── README.md            # 4. Project Documentation (Architecture, Best Practices)
+├── architecture.png     # 5. Visual Diagram for the README
+├── modules/
+│   ├── compute/         # Module for the EC2 Microservice Layer
+│   │   ├── main.tf      # Creates EC2 Instance, Security Group, IAM Role (Least Privilege)
+│   │   ├── variables.tf # Inputs: vpc_id, subnet_id, s3_bucket_arn
+│   │   └── outputs.tf   # Outputs: instance_id, security_group_id
+│   │
+│   ├── database/        # Module for the RDS Persistence Layer
+│   │   ├── main.tf      # Creates RDS Instance (PostgreSQL/Multi-AZ), DB Security Group
+│   │   ├── variables.tf # Inputs: vpc_id, compute_sg_id, credentials
+│   │   └── outputs.tf   # Outputs: db_endpoint, db_sg_id
+│   │
+│   ├── network/         # Module for the VPC Networking Foundation
+│   │   ├── main.tf      # Creates VPC, Public/Private Subnets, IGW, NAT Gateways, DB Subnet Group
+│   │   ├── variables.tf # Inputs: vpc_cidr, azs
+│   │   └── outputs.tf   # Outputs: vpc_id, private_subnet_ids, database_subnet_group_name
+│   │
+│   └── storage/         # Module for the S3 Static Storage Layer
+│       ├── main.tf      # Creates S3 Bucket, enforces Public Access Block, Versioning, Encryption
+│       ├── variables.tf # Inputs: service_name, environment
+│       └── outputs.tf   # Outputs: bucket_id, bucket_arn
+```

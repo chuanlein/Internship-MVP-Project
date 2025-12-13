@@ -1,0 +1,70 @@
+---
+title: AWS Architecture Diagram
+---
+
+flowchart LR
+    %% AWS Cloud Layer
+    subgraph aws_cloud ["AWS Cloud"]
+        direction TB
+        VPC["VPC<br/>(Virtual Private Cloud)"]:::vpc
+        IGW["Internet Gateway"]:::public
+        NAT1["NAT Gateway 1"]:::public
+    end
+    
+    subgraph Public_Subnet["Public Subnet (az-1)"]
+        direction TB
+        IGW --> NAT1
+        NAT1 --> NAT2
+        NAT2["NAT Gateway 2"]:::public
+    end
+
+    subgraph Private_Subnet["Private Subnet (az-2)"]
+        direction TB
+        EC2["EC2 Instance<br/>Microservice DB"]:::compute
+        RDS["RDS Instance<br/>PostgreSQL DB"]:::db
+    end
+
+    EC2 --> RDS
+
+    subgraph Security
+        direction TB
+        AppSG["App SG<br/>Port 8080"]:::security
+        DBSG["DB SG<br/>Port 5432"]:::security
+    end
+
+    subgraph Monitoring_and_Assets["Monitoring & Assets"]
+        direction TB
+        CW["CloudWatch Logs/Metrics"]:::monitor
+        S3["S3 Bucket<br/>Static Assets"]:::storage
+    end
+
+    IAM["IAM Role"]:::iam
+
+    %% Connections
+    IGW -.-|App Traffic| AppSG
+    NAT2 --> EC2
+    EC2 -.-> AppSG
+    EC2 -.->|DB:5432| DBSG
+    AppSG --> IAM
+    DBSG --> IAM
+    IAM --> CW
+    IAM --> S3
+
+    %% Classes (Colors)
+    classDef vpc      fill:#A3CEF1,stroke:#4361EE,stroke-width:2px,color:#222;
+    classDef public   fill:#FFE066,stroke:#FFD60A,stroke-width:2px,color:#333;
+    classDef db       fill:#EDF2FB,stroke:#720026,stroke-width:2px,color:#720026;
+    classDef compute  fill:#B6FFFA,stroke:#02C39A,stroke-width:2px,color:#134E5E;
+    classDef security fill:#F9B4AB,stroke:#D7263D,stroke-width:2px,color:#A4161A;
+    classDef monitor  fill:#B5E48C,stroke:#40916C,stroke-width:2px,color:#184D47;
+    classDef storage  fill:#FDCB7D,stroke:#F8961E,stroke-width:2px,color:#7A4F01;
+    classDef iam      fill:#BCCEF8,stroke:#3B3A6D,stroke-width:2px,color:#1B1B2F;
+
+    class VPC vpc;
+    class IGW,NAT1,NAT2 public;
+    class EC2 compute;
+    class RDS db;
+    class AppSG,DBSG security;
+    class CW monitor;
+    class S3 storage;
+    class IAM iam;
