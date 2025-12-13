@@ -5,3 +5,5 @@
 # OS / IDE
 .DS_Store
 .vscode/
+.terraform/
+*.tfstate
