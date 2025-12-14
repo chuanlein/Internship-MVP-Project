@@ -6,7 +6,7 @@ This project models a small, realistic Minimum Viable Product (MVP) infrastructu
 
 ## 🏗️ Architecture Diagram & Overview
 
-The MVP is designed as a secure, two-tier application within a custom Virtual Private Cloud (VPC).
+The MVP is designed as a secure, three-tier application within a custom Virtual Private Cloud (VPC).
 
 ![AWS VPC infrastructure diagram](Image/aws_vpc_infrastructure.png)
 
