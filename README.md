@@ -8,6 +8,8 @@ This project models a small, realistic Minimum Viable Product (MVP) infrastructu
 
 The MVP is designed as a secure, two-tier application within a custom Virtual Private Cloud (VPC).
 
+![AWS VPC infrastructure diagram](Image/aws_vpc_infrastructure.png)
+
 | Component | AWS Service | Purpose | Security/Access |
 | :--- | :--- | :--- | :--- |
 | **Network** | VPC, Subnets, NAT GW | Provides an isolated virtual network environment. | Multi-AZ (High Availability), Private Subnets for all resources. |
