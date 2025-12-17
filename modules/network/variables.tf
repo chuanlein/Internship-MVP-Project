@@ -19,15 +19,15 @@ variable "private_subnet_cidrs" {
 variable "azs" {
   description = "A list of Availability Zones to use (e.g., [\"us-east-1a\", \"us-east-1b\"])."
   type        = list(string)
-  # NOTE: In a real deployment, you would likely use a data source to dynamically fetch AZs.
 }
 
-variable "service_name" {
-  description = "The name of the service/project (for naming/tagging)."
+# This is the NEW variable that REPLACES service_name and environment
+variable "project_name" { 
+  description = "The name of the project/service (used for naming, tagging, and the DB Subnet Group)."
   type        = string
 }
 
 variable "environment" {
-  description = "The environment tag (e.g., dev, stage, prod)."
+  description = "The environment tag (e.g., dev, stage, prod) used for resource tagging."
   type        = string
 }

@@ -12,6 +12,7 @@ resource "aws_security_group" "db_sg" {
     from_port       = var.db_port
     to_port         = var.db_port
     protocol        = "tcp"
+    # Use the compute layer security group variable declared in variables.tf
     security_groups = [var.compute_sg_id] # Critical: Only the EC2 SG can connect
   }
 

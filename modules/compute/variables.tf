@@ -41,3 +41,14 @@ variable "s3_bucket_arn" {
   description = "The ARN of the S3 bucket the microservice needs to access."
   type        = string
 }
+
+variable "vpc_cidr" {
+  description = "The CIDR block of the VPC (e.g., 10.0.0.0/16) used for restricting Security Group ingress."
+  type        = string
+}
+
+variable "lb_security_group_id" {
+  description = "The Security Group ID of the Load Balancer, used to restrict ingress to the EC2 instance."
+  type        = string
+  # Note: A default is usually not needed here since it should be an explicit input.
+}

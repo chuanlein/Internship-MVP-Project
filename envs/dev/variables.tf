@@ -48,3 +48,9 @@ variable "db_password" {
   default   = "SecureP@ssw0rd123"
   sensitive = true # Mark as sensitive to prevent output in logs/state
 }
+
+variable "vpc_cidr" {
+  description = "The CIDR block for the entire VPC."
+  type        = string
+  default     = "10.0.0.0/16"
+}

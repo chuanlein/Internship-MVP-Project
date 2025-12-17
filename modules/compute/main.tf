@@ -61,27 +61,17 @@ resource "aws_security_group" "app_sg" {
   name        = "${var.service_name}-sg"
   description = "Allow inbound traffic for the microservice and SSH"
   vpc_id      = var.vpc_id
-
-  # Allow inbound traffic on the microservice port (e.g., 8080)
-  # NOTE: In a production setup, the 'cidr_blocks' would be the internal
-  # IP range of the Load Balancer/internal network, not 0.0.0.0/0.
+    
+## CRITICAL FIX: Restrict Ingress. This should NOT be 0.0.0.0/0
   ingress {
-    description = "Microservice Port"
+    description = "Allow App traffic (Port 8080) from Load Balancer/Public Layer"
     from_port   = var.service_port
     to_port     = var.service_port
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Conceptual: Accessible from anywhere in the VPC/LB
+    # Assuming you pass the Security Group ID of the Load Balancer
+    security_groups = [var.lb_security_group_id]
   }
-
-  # Allow inbound SSH access for management (bastion host)
-  ingress {
-    description = "SSH Access"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # Conceptual: Accessible from anywhere (should be restricted to a bastion/VPN in real life)
-  }
-
+  
   # Allow all outbound traffic (default for most apps)
   egress {
     from_port   = 0
