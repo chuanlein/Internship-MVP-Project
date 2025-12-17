@@ -6,6 +6,7 @@ This project models a small, realistic Minimum Viable Product (MVP) infrastructu
 
 ## 🏗️ Architecture Diagram & Overview (Corrected to Three-Tier)
 
+<<<<<<< HEAD
 The MVP is designed as a secure, **three-tier application model** within a custom Virtual Private Cloud (VPC).
 
 This architecture distinctly separates:
@@ -13,6 +14,11 @@ This architecture distinctly separates:
 1.  **Logic Tier** (EC2 Microservice)
 2.  **Data Tier** (RDS Database)
 3.  **Storage Tier** (S3 Assets)
+=======
+The MVP is designed as a secure, three-tier application within a custom Virtual Private Cloud (VPC).
+
+![AWS VPC infrastructure diagram](Image/aws_vpc_infrastructure.png)
+>>>>>>> df81237a7f25c46d7a3bae9f8c19c520c9ffccd4
 
 | Component | AWS Service | Purpose | Security/Access |
 | :--- | :--- | :--- | :--- |
