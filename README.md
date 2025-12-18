@@ -101,18 +101,27 @@ terraform {
 
 Below are the key Terraform commands executed to validate and manage the MVP infrastructure:
 
-### 1\. Terraform Validate
+### 1\. Terraform Format and Validate
 
-Validates the syntax and configuration of all Terraform files.
+Formates and Validates the syntax and configuration of all Terraform files.
+![Validate Diagram](./Image/1-terraform-validate.png)
 
-### 2\. Terraform Plan
-
-Generates an execution plan showing all resources that will be created, modified, or destroyed.
-
-### 3\. Terraform Init
+### 2\. Terraform Init
 
 Initializes the Terraform working directory, preparing it for other commands.
+![Init Diagram](./Image/2-terraform-init.png)
 
-### 4\. Terraform Destroy
+### 3\. Terraform Plan
+
+Generates an execution plan showing all resources that will be created, modified, or destroyed.
+![Plan Diagram](./Image/3-terraform-plan.png)
+
+### 4\. Terraform Apply
+
+Prints out the execution plan and ask you to confirm the changes before it applies them.
+![Apply Diagram](./Image/4-terraform-apply.png)
+
+### 5\. Terraform Destroy
 
 Removes all resources managed by Terraform.
+![Destroy Diagram](./Image/5-terraform-destory.png)
