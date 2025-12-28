@@ -30,8 +30,8 @@ module "microservice_app" {
   environment  = var.environment
   ami_id       = var.ami_id
 
-# CRITICAL FIX: Add the required argument for the LB Security Group ID
-  lb_security_group_id = "" # <-- Pass an empty string placeholder for now Group ID
+# FIX: Replaced empty string with a placeholder to signal this is a planned feature
+  lb_security_group_id = "sg-placeholder-for-planned-alb"
 
   # Connect inputs required by modules/compute/variables.tf:
   vpc_cidr      = var.vpc_cidr
